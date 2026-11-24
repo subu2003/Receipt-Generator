@@ -398,8 +398,6 @@ $('genBtn').addEventListener('click',function(){
   if(!(c.amount>0))return setMsg('Enter a valid amount.','err');
   if(!(c.no>0))return setMsg('Enter the receipt number.','err');
   if(!c.donationDate||!c.receiptDate)return setMsg('Pick both dates.','err');
-  var clash=null; rows.forEach(function(r){ if(r.no===c.no)clash=r; });
-  if(clash)return setMsg('Receipt no. '+pad3(c.no)+' is already used for '+clash.name+'. Pick another number.','err');
   var btn=$('genBtn'); btn.disabled=true; setMsg('Preparing PDF…');
   buildAndDeliver(c).then(function(){
     return saveRow({no:c.no,name:c.name,amount:c.amount,words:c.words,donationDate:c.donationDate,receiptDate:c.receiptDate,mode:c.mode});
